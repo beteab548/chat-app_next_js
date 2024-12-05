@@ -1,5 +1,5 @@
 //logic to check if the user already exists in the database by calling the prisma client insatance
-import getPrismaInstance from "../utils/PrismaClient";
+import getPrismaInstance from "../utils/PrismaClient.js";
 export const checkAuth = async (req, res, next) => {
   const { email } = req.body;
   if (!email) {

@@ -10,6 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 model user{
-  //define the user schema here
+id Int @id @default(autoincrement())
+email String @unique
 }
 //setup the proper postgres url here 
