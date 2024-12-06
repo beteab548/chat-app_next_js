@@ -1,8 +1,13 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { useStateprovider } from "@/context/StateContext";
+import Input from "@/components/common/Input";
+import Avatar from "@/components/common/Avatar";
 function onboarding() {
   const { state } = useStateprovider();
+  const [name, setName] = useState(state?.userData?.name || "");
+  const [bio, setBio] = useState("");
+  const [image, setImage] = useState("/default_avatar.png");
   console.log(state);
   return (
     <div className="flex h-screen w-screen text-black flex-col items-center justify-center ">
@@ -21,10 +26,21 @@ function onboarding() {
           className="flex
  flex-col items-center justify-center mt-5 gap-6"
         >
-          {state?.userData?.name}
+          <Input
+            name={"display name"}
+            state={name}
+            setstate={setName}
+            lable={true}
+          />
+          <Input name={"bio"} state={bio} setstate={setBio} lable={true} />
+        </div>
+        <div>
+          <Avatar type={"xl"} image={image} setImage={setImage} />
         </div>
       </div>
     </div>
+    //this is where i create a context when the profile picture is clicked
+    //also the inputs for name and bio
   );
 }
 

@@ -1,7 +1,23 @@
 import React from "react";
 
-function Input() {
-  return <div>Input</div>;
+function Input({ name, state, setstate, lable = false }) {
+  return (
+    <div className="flex gap-1 flex-col">
+      {lable && (
+        <label htmlFor={name} className=" text-gray-800 text-lg px-1">
+          {name}
+        </label>
+      )}
+      <div>
+        <input
+          type="text"
+          name={name}
+          value={state}
+          onChange={(e) => setstate(e.target.value)}
+          className=" bg-slate-400 text-start focus:outline-none text-neutral-700"
+        />
+      </div>
+    </div>
+  );
 }
-
 export default Input;
