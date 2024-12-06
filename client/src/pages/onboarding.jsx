@@ -1,7 +1,9 @@
 import Image from "next/image";
 import React from "react";
-
+import { useStateprovider } from "@/context/StateContext";
 function onboarding() {
+  const { state } = useStateprovider();
+  console.log(state);
   return (
     <div className="flex h-screen w-screen text-black flex-col items-center justify-center ">
       <div className="flex items-center justify-center gap-2">
@@ -18,7 +20,9 @@ function onboarding() {
         <div
           className="flex
  flex-col items-center justify-center mt-5 gap-6"
-        ></div>
+        >
+          {state?.userData?.name}
+        </div>
       </div>
     </div>
   );

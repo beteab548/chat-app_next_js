@@ -7,8 +7,11 @@ import { auth } from "@/utils/FirebaseConfig";
 import axios from "axios";
 import { CHECK_USER_AUTH } from "@/utils/ApiRoutes";
 import { useRouter } from "next/router";
+import { useStateprovider } from "@/context/StateContext";
+import { reducerCases } from "@/context/constants";
 function login() {
   const router = useRouter();
+  const { dispatch } = useStateprovider();
   async function login() {
     const provider = new GoogleAuthProvider();
     const { user } = await signInWithPopup(auth, provider);
@@ -23,6 +26,8 @@ function login() {
           email: userData.email,
         });
         console.log(data);
+        //this is where i dispatch the action and set the globalstate userData to the userData i authenticated
+        dispatch({ type: reducerCases.SET_USER_INFO, userData });
         if (!data.status) {
           router.push("/onboarding");
         }
