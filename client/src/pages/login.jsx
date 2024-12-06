@@ -19,11 +19,11 @@ function login() {
     };
     try {
       if (userData) {
-        const { data, status } = await axios.post(CHECK_USER_AUTH, {
+        const { data } = await axios.post(CHECK_USER_AUTH, {
           email: userData.email,
         });
-        console.log(status);
-        if (status) {
+        console.log(data);
+        if (!data.status) {
           router.push("/onboarding");
         }
       }
