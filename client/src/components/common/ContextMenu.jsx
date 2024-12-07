@@ -1,7 +1,50 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
-function ContextMenu() {
-  return <div>ContextMenu</div>;
+function ContextMenu({
+  contextOptions,
+  coordinates,
+  setShowContextMenu,
+  showContextMenu,
+}) {
+  useEffect(() => {
+    function handleOutSideClick(e) {
+      console.log(e.target.id);
+      if (e.target.id !== " contex-menu") {
+        setShowContextMenu(false);
+      }
+    }
+    document.addEventListener("click", handleOutSideClick);
+    return () => {
+      document.removeEventListener("click", handleOutSideClick);
+    };
+  }, []);
+  const contextMenuRef = useRef(null);
+  function handelClick(e) {
+    e.stopPropagation();
+    setShowContextMenu(false);
+  }
+  return (
+    <div
+      ref={contextMenuRef}
+      className=" py-2  fixed z-[100] shadow-x1 bg-green-300 "
+      style={{ top: coordinates.y, left: coordinates.x }}
+    >
+      <ul>
+        {contextOptions.map(({ name, callback }) => {
+          return (
+            <li
+              key={name}
+              className="py-2 px-4 bg-green-300 hover:bg-green-400 cursor-pointer"
+              onClick={(e) => {
+                handelClick(e, callback);
+              }}
+            >
+              <span>{name}</span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
 }
-
 export default ContextMenu;

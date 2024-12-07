@@ -39,8 +39,6 @@ function onboarding() {
         </div>
       </div>
     </div>
-    //this is where i create a context when the profile picture is clicked
-    //also the inputs for name and bio
   );
 }
 
