@@ -8,7 +8,6 @@ function ContextMenu({
 }) {
   useEffect(() => {
     function handleOutSideClick(e) {
-      console.log(contextMenuRef.current);
       if (e.target.id !== "contex-menu") {
         if (
           contextMenuRef.current &&
@@ -24,8 +23,9 @@ function ContextMenu({
     };
   }, []);
   const contextMenuRef = useRef(null);
-  function handelClick(e) {
+  function handelClick(e, callback) {
     e.stopPropagation();
+    callback();
     setShowContextMenu(false);
   }
   return (
