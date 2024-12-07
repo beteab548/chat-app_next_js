@@ -8,9 +8,14 @@ function ContextMenu({
 }) {
   useEffect(() => {
     function handleOutSideClick(e) {
-      console.log(e.target.id);
-      if (e.target.id !== " contex-menu") {
-        setShowContextMenu(false);
+      console.log(contextMenuRef.current);
+      if (e.target.id !== "contex-menu") {
+        if (
+          contextMenuRef.current &&
+          !contextMenuRef.current.contains(e.target)
+        ) {
+          setShowContextMenu(false);
+        }
       }
     }
     document.addEventListener("click", handleOutSideClick);

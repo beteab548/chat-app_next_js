@@ -50,6 +50,7 @@ function Avatar({ image, type, setImage }) {
             }}
           >
             <div
+               id="contex-menu"
               className={`absolute top-0 left-0 bg-photopicker-overlay-background h-60 w-60 flex flex-col items-center justify-center gap-2 z-[100] ${
                 hover ? "visible" : "hidden"
               }`}
