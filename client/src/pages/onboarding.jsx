@@ -13,14 +13,14 @@ function onboarding() {
   const [name, setName] = useState(state?.userData?.name || "");
   const [bio, setBio] = useState("");
   const [image, setImage] = useState("/default_avatar.png");
-  console.log(state);
-  useEffect(() => {
-    if (!state.newUser && state.userData?.email) {
-      router.push("/");
-    } else if (!state.newUser && !state.userData?.email) {
-      router.push("/login");
-    }
-  }, [router, state.newUser, state.userData]);
+  // console.log(state);
+  // useEffect(() => {
+  //   if (!state.newUser && state.userData?.email) {
+  //     router.push("/");
+  //   } else if (!state.newUser && !state.userData?.email) {
+  //     router.push("/login");
+  //   }
+  // }, [router, state.newUser, state.userData]);
   async function onBoardHandler() {
     if (validateDetails()) {
       const email = state?.userData?.email || "endoumamure@gmail.com";
