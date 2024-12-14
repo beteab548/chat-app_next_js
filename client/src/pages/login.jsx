@@ -25,11 +25,13 @@ function login() {
         const { data } = await axios.post(CHECK_USER_AUTH, {
           email: userData.email,
         });
-        console.log(data);
         //this is where i dispatch the action and set the globalstate userData to the userData i authenticated
+        dispatch({ type: reducerCases.SET_NEW_USER, newUser: true });
         dispatch({ type: reducerCases.SET_USER_INFO, userData });
         if (!data.status) {
           router.push("/onboarding");
+        } else {
+          router.push("/login");
         }
       }
     } catch (err) {

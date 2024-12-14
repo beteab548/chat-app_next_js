@@ -1,28 +1,44 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useStateprovider } from "@/context/StateContext";
 import Input from "@/components/common/Input";
 import Avatar from "@/components/common/Avatar";
 import axios from "axios";
 import { ONBOARD_USER_ROUTE } from "@/utils/ApiRoutes";
+import { reducerCases } from "@/context/constants";
+import { useRouter } from "next/router";
 function onboarding() {
-  const { state } = useStateprovider();
+  const router = useRouter();
+  const { state, dispatch } = useStateprovider();
   const [name, setName] = useState(state?.userData?.name || "");
   const [bio, setBio] = useState("");
   const [image, setImage] = useState("/default_avatar.png");
   console.log(state);
+  useEffect(() => {
+    if (!state.newUser && state.userData?.email) {
+      router.push("/");
+    } else if (!state.newUser && !state.userData?.email) {
+      router.push("/login");
+    }
+  }, [router, state.newUser, state.userData]);
   async function onBoardHandler() {
     if (validateDetails()) {
       const email = state.userData.email;
-
       try {
-        const { data } = axios.post(ONBOARD_USER_ROUTE, {
+        const { data } = await axios.post(ONBOARD_USER_ROUTE, {
           email,
           name,
           bio,
           image,
         });
+        console.log(data);
         if (data.status) {
+          dispatch({ type: reducerCases.SET_NEW_USER, newUser: false });
+          dispatch({
+            type: reducerCases.SET_USER_INFO,
+            userData: { name, email, profileImage: image, status: bio },
+          });
+          router.push("/");
         }
       } catch (err) {
         console.log(err);
@@ -60,7 +76,10 @@ function onboarding() {
           />
           <Input name={"bio"} state={bio} setstate={setBio} lable={true} />
           <div className="flex items justify-center">
-            <button className="flex gap-4 items-center justify-center bg-slate-200 w-64 h-12 hover:bg-slate-300">
+            <button
+              className="flex gap-4 items-center justify-center bg-slate-200 w-64 h-12 hover:bg-slate-300"
+              onClick={onBoardHandler}
+            >
               Create Profile
             </button>
           </div>
