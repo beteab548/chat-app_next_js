@@ -28,7 +28,7 @@ function login() {
         //this is where i dispatch the action and set the globalstate userData to the userData i authenticated
         dispatch({ type: reducerCases.SET_NEW_USER, newUser: true });
         dispatch({ type: reducerCases.SET_USER_INFO, userData });
-        if (!data.status) {
+        if (data.status) {
           router.push("/onboarding");
         } else {
           router.push("/login");

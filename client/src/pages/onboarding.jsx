@@ -23,7 +23,7 @@ function onboarding() {
   }, [router, state.newUser, state.userData]);
   async function onBoardHandler() {
     if (validateDetails()) {
-      const email = state.userData.email;
+      const email = state?.userData?.email || "endoumamure@gmail.com";
       try {
         const { data } = await axios.post(ONBOARD_USER_ROUTE, {
           email,
