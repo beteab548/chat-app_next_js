@@ -148,7 +148,7 @@ function Avatar({ image, type, setImage }) {
           coordinates={contextMenuCoordinates}
         />
       )}
-      {showCapturePhoto && <CapturePhoto  setimage={setImage} hide={setShowCapturePhoto}/>}
+      {showCapturePhoto && <CapturePhoto  setImage={setImage} hide={setShowCapturePhoto}/>}
       {showPhotoLibrary && (
         <PhotoLibrary
           setImage={setImage}

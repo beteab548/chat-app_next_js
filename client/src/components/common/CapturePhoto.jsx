@@ -2,9 +2,9 @@ import React, { useEffect, useRef } from "react";
 import { IoClose } from "react-icons/io5";
 function CapturePhoto({ setImage, hide }) {
   const videoRef = useRef(null);
+  let stream;
   useEffect(() => {
     async function startCamera() {
-      let stream;
       stream = await navigator.mediaDevices.getUserMedia({
         video: true,
         audio: false,
@@ -13,15 +13,20 @@ function CapturePhoto({ setImage, hide }) {
     }
     startCamera();
     return () => {
-      stream.getTracks().forEach((track) => {
+      stream?.getTracks().forEach((track) => {
         track.stop();
       });
     };
   }, []);
-  function CapturePhoto() {}
+  function CapturePhoto() {
+    const canvas = document.createElement("canvas");
+    canvas.getContext("2d").drawImage(videoRef.current, 0, 0, 300, 150);
+    setImage(canvas.toDataURL("image/jpeg"));
+    hide(false);
+  }
   return (
     <div className="absolute h-4/6 w-2/6 top-1/4 left-1/3 bg-green-200 gap-3 rounded-lg pt-2 flex items-center justify-center">
-      <div className="flex flex-col gap-4 w-full ">
+      <div className="flex flex-col gap-4 w-full justify-center items-center">
         <div
           className="pt-2 pr-2 cursor-pointer flex items-end justify-end"
           onClick={() => {

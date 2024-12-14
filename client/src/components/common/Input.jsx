@@ -14,7 +14,7 @@ function Input({ name, state, setstate, lable = false }) {
           name={name}
           value={state}
           onChange={(e) => setstate(e.target.value)}
-          className=" bg-green-300 text-start focus:outline-none text-neutral-700"
+          className="flex items-center justify-center bg-slate-200 w-56 h-10 "
         />
       </div>
     </div>

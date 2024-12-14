@@ -3,12 +3,38 @@ import React, { useState } from "react";
 import { useStateprovider } from "@/context/StateContext";
 import Input from "@/components/common/Input";
 import Avatar from "@/components/common/Avatar";
+import axios from "axios";
+import { ONBOARD_USER_ROUTE } from "@/utils/ApiRoutes";
 function onboarding() {
   const { state } = useStateprovider();
   const [name, setName] = useState(state?.userData?.name || "");
   const [bio, setBio] = useState("");
   const [image, setImage] = useState("/default_avatar.png");
   console.log(state);
+  async function onBoardHandler() {
+    if (validateDetails()) {
+      const email = state.userData.email;
+
+      try {
+        const { data } = axios.post(ONBOARD_USER_ROUTE, {
+          email,
+          name,
+          bio,
+          image,
+        });
+        if (data.status) {
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
+  const validateDetails = () => {
+    if (name.length < 3) {
+      return false;
+    }
+    return true;
+  };
   return (
     <div className="flex h-screen w-screen text-black flex-col items-center justify-center ">
       <div className="flex items-center justify-center gap-2">
@@ -33,7 +59,13 @@ function onboarding() {
             lable={true}
           />
           <Input name={"bio"} state={bio} setstate={setBio} lable={true} />
+          <div className="flex items justify-center">
+            <button className="flex gap-4 items-center justify-center bg-slate-200 w-64 h-12 hover:bg-slate-300">
+              Create Profile
+            </button>
+          </div>
         </div>
+
         <div>
           <Avatar type={"xl"} image={image} setImage={setImage} />
         </div>
