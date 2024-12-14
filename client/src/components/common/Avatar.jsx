@@ -4,6 +4,7 @@ import { FcCamera } from "react-icons/fc";
 import ContextMenu from "./ContextMenu";
 import PhotoPicker from "./PhotoPicker";
 import PhotoLibrary from "./PhotoLibrary";
+import CapturePhoto from "./CapturePhoto";
 function Avatar({ image, type, setImage }) {
   const [hover, setHover] = useState(false);
   const [showContextMenu, setShowContextMenu] = useState(false);
@@ -12,6 +13,7 @@ function Avatar({ image, type, setImage }) {
     y: 0,
   });
   const [grabphoto, setgrabPhoto] = useState(false);
+  const [showCapturePhoto, setShowCapturePhoto] = useState(false);
   const [showPhotoLibrary, setShowPhotoLibrary] = useState(false);
   function handleClick(e) {
     e.preventDefault();
@@ -34,7 +36,12 @@ function Avatar({ image, type, setImage }) {
     }, 100);
   }
   const contextOptions = [
-    { name: "take a photo", callback: () => {} },
+    {
+      name: "take a photo",
+      callback: () => {
+        setShowCapturePhoto(true);
+      },
+    },
     {
       name: "choose from preset",
       callback: () => {
@@ -141,6 +148,7 @@ function Avatar({ image, type, setImage }) {
           coordinates={contextMenuCoordinates}
         />
       )}
+      {showCapturePhoto && <CapturePhoto  setimage={setImage} hide={setShowCapturePhoto}/>}
       {showPhotoLibrary && (
         <PhotoLibrary
           setImage={setImage}
