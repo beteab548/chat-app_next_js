@@ -6,7 +6,7 @@ function index() {
     <div>
       <Main />
     </div>
-  );
+  )
 }
 
 export default index;

@@ -8,6 +8,7 @@ import axios from "axios";
 import { CHECK_USER_AUTH } from "@/utils/ApiRoutes";
 import { useRouter } from "next/router";
 import { reducerCases } from "@/context/constants";
+import Chat from "./Chat/Chat";
 
 function Main() {
   //fix the state contexts not being consistent in the context when ever i reaload the page
@@ -24,20 +25,20 @@ function Main() {
       setRedirectLogin(true);
     }
     if (!state?.userData && currentUser?.email) {
-      const { data } = await axios.post(CHECK_USER_AUTH, {
-        email: currentUser.email,
-      });
-      if (!data.status) {
-        router.push("/login");
-      }
-      dispatch({ type: reducerCases.SET_NEW_USER, userData: data.data });
+      // const { data } = await axios.post(CHECK_USER_AUTH, {
+      // email: currentUser.email,
+      // });
+      // if (!data.status) {
+      // router.push("/login");
+      // }
+      // dispatch({ type: reducerCases.SET_NEW_USER, userData: data.data });
     }
   });
   return (
     <>
       <div className="grid grid-cols-main w-screen h-screen max-h-screen max-width-screen">
         <ChatList />
-        <Empty />
+        <Chat />
       </div>
     </>
   );
