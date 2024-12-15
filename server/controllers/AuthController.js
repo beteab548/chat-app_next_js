@@ -31,6 +31,34 @@ export const onBoardUser = async (req, res, next) => {
     });
     res.json({ status: true, data: data });
   } catch (err) {
+    next(err);
+    console.log(err);
+  }
+};
+export const getAllUsers = async (req, res, next) => {
+  try {
+    const prisma = getPrismaInstance();
+    const user = await prisma.user.findMany({
+      orderBy: { name: "asc" },
+      selsect: {
+        id: true,
+        email: true,
+        name: true,
+        profilePicture: true,
+        bio: true,
+      },
+    });
+    const userGroupedByInitialLetter = {};
+    user.forEach((user) => {
+      const initalLetter = user.name.charAt(0).toUpperCase();
+      if (!userGroupedByInitialLetter[initalLetter]) {
+        userGroupedByInitialLetter[initalLetter] = [];
+      }
+      userGroupedByInitialLetter[initalLetter].push(user);
+    });
+    return res.status(200).send({ users: userGroupedByInitialLetter });
+  } catch (err) {
+    next(err);
     console.log(err);
   }
 };
