@@ -6,6 +6,7 @@ function ContextMenu({
   setShowContextMenu,
   showContextMenu,
 }) {
+  
   useEffect(() => {
     function handleOutSideClick(e) {
       if (e.target.id !== "contex-menu") {

@@ -64,11 +64,17 @@ function Avatar({ image, type, setImage }) {
   useEffect(() => {
     if (grabphoto) {
       const data = document.getElementById("photo-picker");
-      data.click();
-      document.body.onfocus = (e) => {
-        setTimeout(() => {
-          setgrabPhoto(false);
-        }, 1000);
+      if (data) {
+        data.click();
+      }
+      const handleFocus = () => {
+        setgrabPhoto(false); // Update the state when focus returns
+      };
+      window.addEventListener("focus", handleFocus);
+
+      // Clean up the event listener to prevent memory leaks
+      return () => {
+        window.removeEventListener("focus", handleFocus);
       };
     }
   }, [grabphoto]);
@@ -148,7 +154,9 @@ function Avatar({ image, type, setImage }) {
           coordinates={contextMenuCoordinates}
         />
       )}
-      {showCapturePhoto && <CapturePhoto  setImage={setImage} hide={setShowCapturePhoto}/>}
+      {showCapturePhoto && (
+        <CapturePhoto setImage={setImage} hide={setShowCapturePhoto} />
+      )}
       {showPhotoLibrary && (
         <PhotoLibrary
           setImage={setImage}

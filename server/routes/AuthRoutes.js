@@ -7,5 +7,5 @@ import {
 const router = express.Router();
 router.post("/check-user", checkAuth);
 router.post("/onboard-user", onBoardUser);
-router.get("/get-contacts ", getAllUsers);
+router.get("/fetchContacts", getAllUsers);
 export default router;

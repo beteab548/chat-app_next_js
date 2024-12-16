@@ -6,14 +6,14 @@ import { reducerCases } from "@/context/constants";
 
 function ChatListHeader() {
   const { state, dispatch } = useStateprovider();
-
+  // console.log(state.contactPage);
   function handelClick() {
     dispatch({ type: reducerCases.SET_ALL_CONTACT_PAGE });
   }
   return (
     <div className="h-16 px-4 py-3 flex justify-between items-center">
-      <div className="cursor-pointer">
-        <Avatar type={"sm"} image={state?.userData?.profileImage} />
+      <div className="cursor-pointer"> 
+        <Avatar type={"sm"} image={state?.userData?.profileImage} /> 
       </div>
       <div className="flex gap-6">
         <BsFillChatLeftTextFill

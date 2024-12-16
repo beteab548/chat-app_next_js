@@ -25,13 +25,13 @@ function Main() {
       setRedirectLogin(true);
     }
     if (!state?.userData && currentUser?.email) {
-      // const { data } = await axios.post(CHECK_USER_AUTH, {
-      // email: currentUser.email,
-      // });
-      // if (!data.status) {
-      // router.push("/login");
-      // }
-      // dispatch({ type: reducerCases.SET_NEW_USER, userData: data.data });
+      const { data } = await axios.post(CHECK_USER_AUTH, {
+        email: currentUser.email,
+      });
+      if (!data.status) {
+        router.push("/login");
+      }
+      dispatch({ type: reducerCases.SET_NEW_USER, userData: data.data });
     }
   });
   return (

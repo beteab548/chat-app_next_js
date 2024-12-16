@@ -40,7 +40,7 @@ export const getAllUsers = async (req, res, next) => {
     const prisma = getPrismaInstance();
     const user = await prisma.user.findMany({
       orderBy: { name: "asc" },
-      selsect: {
+      select: {
         id: true,
         email: true,
         name: true,

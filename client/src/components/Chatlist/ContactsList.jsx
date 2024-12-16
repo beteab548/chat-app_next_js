@@ -10,22 +10,28 @@ function ContactsList() {
   const [allContacts, setAllContacts] = useState([]);
   useEffect(() => {
     const getContacts = async () => {
-      // const {
-      //   data: { users },
-      // } = await axios.get(GET_ALL_CONTACTS);
-      setAllContacts([{ asdasd: "asdasd" }]);
+      try {
+        const {
+          data: { users },
+        } = await axios.get(GET_ALL_CONTACTS);
+        setAllContacts(users);
+      } catch (err) {
+        console.log(err);
+      }
     };
     getContacts();
   }, []);
+  function handelClick() {
+    dispatch({ type: reducerCases.SET_ALL_CONTACT_PAGE });
+  }
+  console.log(allContacts);
   return (
     <div className="h-full flex flex-col">
       <div className="h-24 flex items-end px-3 py-4">
         <div className="flex items-center gap-12 text-white">
           <BiArrowBack
             className="cursor-pointer text-xl"
-            onClick={() =>
-              dispatch({ type: reducerCases.SET_ALL_CONTACT_PAGE })
-            }
+            onClick={handelClick}
           />
           <span>New Chat</span>
         </div>

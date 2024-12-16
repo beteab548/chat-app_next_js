@@ -8,6 +8,7 @@ import ContactsList from "./ContactsList";
 function ChatList() {
   const { state } = useStateprovider();
   const [pageType, setpageType] = useState("default");
+  // console.log(state.contactPage);
   useEffect(() => {
     if (state.contactPage) {
       setpageType("all-contacts");
