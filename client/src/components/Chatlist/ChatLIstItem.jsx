@@ -1,9 +1,20 @@
 import React from "react";
 import Avatar from "../common/Avatar";
+import { useStateprovider } from "@/context/StateContext";
+import { reducerCases } from "@/context/constants";
 
 function ChatLIstItem({ data, inContactPage = false }) {
+  const { state, dispatch } = useStateprovider();
+  function handleContactClick() {
+    dispatch({ type: reducerCases.SET_CURRENT_CHAT_USER, user: { data } });
+    dispatch({ type: reducerCases.SET_ALL_CONTACT_PAGE});
+
+  }
   return (
-    <div className="flex cursor-pointer items-center hover:bg-background-default-hover">
+    <div
+      className="flex cursor-pointer items-center hover:bg-background-default-hover"
+      onClick={handleContactClick}
+    >
       <div className="min-w-fit px-5 pt-3 pb-1">
         <Avatar type="lg" image={data?.profilePicture} />
       </div>

@@ -3,6 +3,7 @@ export const initialState = {
   userData: undefined,
   newUser: false,
   contactPage: false,
+  currentChatUser: undefined,
 };
 export const reducers = (state, action) => {
   switch (action.type) {
@@ -12,6 +13,8 @@ export const reducers = (state, action) => {
       return { ...state, newUser: action.newUser };
     case reducerCases.SET_ALL_CONTACT_PAGE:
       return { ...state, contactPage: !state.contactPage };
+    case reducerCases.SET_CURRENT_CHAT_USER:
+      return { ...state, currentChatUser: action.user };
     default:
       return;
   }
