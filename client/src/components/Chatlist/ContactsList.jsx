@@ -14,6 +14,7 @@ function ContactsList() {
         const {
           data: { users },
         } = await axios.get(GET_ALL_CONTACTS);
+        console.log("fetched data:", users);
         setAllContacts(users);
       } catch (err) {
         console.log(err);
@@ -51,9 +52,18 @@ function ContactsList() {
             </div>
           </div>
         </div>
+        {Object.entries(allContacts).map(([initaialLetters, userLists]) => {
+          console.log("contacts", initaialLetters);
+          return (
+            <div key={Date.now() + initaialLetters}>
+              <div className="text-teal-light pl-10 py-5">
+                {initaialLetters}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 }
-
 export default ContactsList;
