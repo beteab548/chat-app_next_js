@@ -15,5 +15,17 @@ email String @unique
 name String 
 profilePicture String @default("")
 bio String @default("")
+sender Message[] @relation("sender")
+ reciever Message[] @relation("reciever")
+}
+model Message{
+  id Int @id @default(autoincrement())
+  sender user @relation("sender",fields: [senderId],references: [id])
+  senderId Int
+  reciever user @relation("reciever",fields: [recieverId],references: [id])
+  recieverId Int
+  type String @default("text")
+  message String
+  createdAt DateTime @default(now())
 }
 //setup the proper postgres url here 

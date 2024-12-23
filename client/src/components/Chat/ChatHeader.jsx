@@ -7,7 +7,6 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { useStateprovider } from "@/context/StateContext";
 function ChatHeader() {
   const { state } = useStateprovider();
-  console.log("in the chat header:", state);
   return (
     <div className="h-16 px-4 py-3 flex justify-between items-center bg-panel-header-background z-10">
       <div className="flex items-center justify-center gap-6">

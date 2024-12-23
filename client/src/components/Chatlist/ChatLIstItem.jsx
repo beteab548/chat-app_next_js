@@ -6,10 +6,12 @@ import { reducerCases } from "@/context/constants";
 function ChatLIstItem({ data, inContactPage = false }) {
   const { state, dispatch } = useStateprovider();
   function handleContactClick() {
+    console.log("currentChatUser:", state.currentChatUser);
+    console.log("data:", data);
     dispatch({ type: reducerCases.SET_CURRENT_CHAT_USER, user: { data } });
-    dispatch({ type: reducerCases.SET_ALL_CONTACT_PAGE});
-
+    dispatch({ type: reducerCases.SET_ALL_CONTACT_PAGE });
   }
+
   return (
     <div
       className="flex cursor-pointer items-center hover:bg-background-default-hover"

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ChatList from "./Chatlist/ChatList";
-import Empty from "./Empty";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/utils/FirebaseConfig";
 import { useStateprovider } from "@/context/StateContext";
@@ -9,7 +8,7 @@ import { CHECK_USER_AUTH } from "@/utils/ApiRoutes";
 import { useRouter } from "next/router";
 import { reducerCases } from "@/context/constants";
 import Chat from "./Chat/Chat";
-
+import Empty from './Empty'
 function Main() {
   //fix the state contexts not being consistent in the context when ever i reaload the page
   const { state, dispatch } = useStateprovider();
@@ -38,7 +37,8 @@ function Main() {
     <>
       <div className="grid grid-cols-main w-screen h-screen max-h-screen max-width-screen">
         <ChatList />
-        <Chat />
+        {state?.currentChatUser ? <Chat />: <Empty />} {/* this is where if their is no user selected the chat container displays the Empty component*/}
+       
       </div>
     </>
   );
