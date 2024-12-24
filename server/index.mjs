@@ -8,7 +8,7 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", AuthRoutes);
-app.use("/api/message/add-message", messageRoutes);
+app.use("/api/message", messageRoutes);
 app.listen(process.env.PORT, () => {
   console.log(`server started on PORT: ${process.env.PORT}`);
 });

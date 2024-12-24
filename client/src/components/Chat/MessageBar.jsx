@@ -3,10 +3,17 @@ import { BsEmojiSmile } from "react-icons/bs";
 import { ImAttachment } from "react-icons/im";
 import { MdSend } from "react-icons/md";
 import { FaMicrophone } from "react-icons/fa";
+import axios from "axios";
+import { ADD_MESSSAGE_ROUTE } from "@/utils/ApiRoutes";
+import { useStateprovider } from "@/context/StateContext";
 function MessageBar() {
   const [message, setMessage] = useState("");
-  function handelMessageSend() {
-    alert("clicked");
+  const { state } = useStateprovider();
+  async function handelMessageSend() {
+    const { data } = await axios.post(ADD_MESSSAGE_ROUTE, {
+      body: { from: state?.userData?.id, to: state?.currentChatUser?.id },
+    });
+    console.log(data);
   }
   return (
     <div className="bg-panel-header-background h-20 px-4 flex items-center gap-6 relative">
