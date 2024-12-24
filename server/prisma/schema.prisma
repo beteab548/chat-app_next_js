@@ -26,6 +26,7 @@ model Message{
   recieverId Int
   type String @default("text")
   message String
+  messageStatus String @default("sent")
   createdAt DateTime @default(now())
 }
 //setup the proper postgres url here 
