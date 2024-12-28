@@ -10,8 +10,9 @@ function MessageBar() {
   const [message, setMessage] = useState("");
   const { state } = useStateprovider();
   async function handelMessageSend() {
+    console.log(state);
     const { data } = await axios.post(ADD_MESSSAGE_ROUTE, {
-      body: { from: state?.userData?.id, to: state?.currentChatUser?.id },
+      body: { from: state?.userData?.id, to: state?.currentChatUser?.data?.id,message },
     });
     console.log(data);
   }

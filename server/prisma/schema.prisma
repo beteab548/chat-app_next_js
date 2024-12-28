@@ -9,24 +9,26 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-model user{
-id Int @id @default(autoincrement())
-email String @unique
-name String 
-profilePicture String @default("")
-bio String @default("")
-sender Message[] @relation("sender")
- reciever Message[] @relation("reciever")
+model user {
+  id             Int       @id @default(autoincrement())
+  email          String    @unique
+  name           String
+  profilePicture String    @default("")
+  bio            String    @default("")
+  sentMessages   message[] @relation("sender")
+  receivedMessages message[] @relation("receiver")
 }
-model Message{
-  id Int @id @default(autoincrement())
-  sender user @relation("sender",fields: [senderId],references: [id])
-  senderId Int
-  reciever user @relation("reciever",fields: [recieverId],references: [id])
-  recieverId Int
-  type String @default("text")
-  message String
-  messageStatus String @default("sent")
-  createdAt DateTime @default(now())
+
+model message {
+  id            Int     @id @default(autoincrement())
+  sender        user    @relation("sender", fields: [senderId], references: [id])
+  senderId      Int
+  receiver      user    @relation("receiver", fields: [receiverId], references: [id])
+  receiverId    Int
+  type          String  @default("text")
+  message       String
+  messageStatus String  @default("sent")
+  createdAt     DateTime @default(now())
 }
+
 //setup the proper postgres url here 

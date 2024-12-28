@@ -11,7 +11,6 @@ function ChatLIstItem({ data, inContactPage = false }) {
     dispatch({ type: reducerCases.SET_CURRENT_CHAT_USER, user: { data } });
     dispatch({ type: reducerCases.SET_ALL_CONTACT_PAGE });
   }
-
   return (
     <div
       className="flex cursor-pointer items-center hover:bg-background-default-hover"

@@ -1,20 +1,22 @@
 import getPrismaInstance from "../utils/PrismaClient.js";
 export const addMessage = async (req, res, next) => {
-    console.log("in the message controller");
-    console.log(req.body);
+  console.log("in the message controller");
   try {
     const prisma = getPrismaInstance();
-    const { from, to, message } = req.body;
+    const {
+      body: { from, to, message },
+    } = req.body;
     const getUser = onlineUserLists.get(to);
+    console.log(from, to, message);
     if (message && from && to) {
-      const messageCreated = await prisma.Message.create({
+      const messageCreated = await prisma.message.create({
         data: {
           sender: { connect: { id: parseInt(from) } },
-          reciever: { connect: { id: parseInt(to) } },
+          receiver: { connect: { id: parseInt(to) } },
           message,
           messageStatus: getUser ? "delivered" : "sent",
         },
-        include: { sender: true, reciever: true },
+        include: { sender: true, receiver: true },
       });
       return res.status(201).send("message stored!");
     }

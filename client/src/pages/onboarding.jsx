@@ -36,7 +36,13 @@ function onboarding() {
           dispatch({ type: reducerCases.SET_NEW_USER, newUser: false });
           dispatch({
             type: reducerCases.SET_USER_INFO,
-            userData: { name, email, profileImage: image, status: bio },
+            userData: {
+              id: data.data.id,
+              name,
+              email,
+              profileImage: image,
+              status: bio,
+            },
           });
           router.push("/");
         }
