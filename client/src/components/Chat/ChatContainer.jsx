@@ -15,7 +15,7 @@ function ChatContainer() {
               return (
                 <div
                   key={message.id}
-                  className={`${
+                  className={`flex ${
                     message.senderId === state?.currentChatUser?.data?.id
                       ? "justify-start"
                       : "justify-end"

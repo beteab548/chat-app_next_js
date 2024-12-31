@@ -12,8 +12,13 @@ function MessageBar() {
   async function handelMessageSend() {
     console.log(state);
     const { data } = await axios.post(ADD_MESSSAGE_ROUTE, {
-      body: { from: state?.userData?.id, to: state?.currentChatUser?.data?.id,message },
+      body: {
+        from: state?.userData?.id,
+        to: state?.currentChatUser?.data?.id,
+        message,
+      },
     });
+    setMessage("");
     console.log(data);
   }
   return (
