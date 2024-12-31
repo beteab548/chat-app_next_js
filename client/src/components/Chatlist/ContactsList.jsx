@@ -15,7 +15,6 @@ function ContactsList() {
         const {
           data: { users },
         } = await axios.get(GET_ALL_CONTACTS);
-        console.log("fetched data:", users);
         setAllContacts(users);
       } catch (err) {
         console.log(err);
@@ -26,7 +25,6 @@ function ContactsList() {
   function handelClick() {
     dispatch({ type: reducerCases.SET_ALL_CONTACT_PAGE });
   }
-  console.log(allContacts);
   return (
     <div className="h-full flex flex-col">
       <div className="h-24 flex items-end px-3 py-4">
@@ -54,7 +52,6 @@ function ContactsList() {
           </div>
         </div>
         {Object.entries(allContacts).map(([initaialLetters, userLists]) => {
-          console.log("contacts", initaialLetters);
           return (
             <div key={Date.now() + initaialLetters}>
               <div className="text-teal-light pl-10 py-5">

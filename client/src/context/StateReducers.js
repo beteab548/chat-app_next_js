@@ -4,6 +4,7 @@ export const initialState = {
   newUser: false,
   contactPage: false,
   currentChatUser: undefined,
+  messages: [],
 };
 export const reducers = (state, action) => {
   switch (action.type) {
@@ -15,6 +16,8 @@ export const reducers = (state, action) => {
       return { ...state, contactPage: !state.contactPage };
     case reducerCases.SET_CURRENT_CHAT_USER:
       return { ...state, currentChatUser: action.user };
+    case reducerCases.SET_MESSAGES:
+      return { ...state, messages: action.messages };
     default:
       return;
   }

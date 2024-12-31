@@ -10,12 +10,12 @@ function ChatList() {
   const [pageType, setpageType] = useState("default");
   // console.log(state.contactPage);
   useEffect(() => {
-    if (state.contactPage) {
+    if (state?.contactPage) {
       setpageType("all-contacts");
     } else {
       setpageType("default");
     }
-  }, [state.contactPage]);
+  }, [state?.contactPage]);
   return (
     <div className="bg-panel-header-background flex flex-col max-h-screen z-20 ">
       {pageType === "default" && (
