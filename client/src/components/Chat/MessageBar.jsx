@@ -18,6 +18,11 @@ function MessageBar() {
         message,
       },
     });
+    state?.socket?.current?.emit("send-msg", {
+      to: state?.currentChatUser?.data?.id,
+      from: state?.userData?.id,
+      message: data.messages,
+    });
     setMessage("");
     console.log(data);
   }

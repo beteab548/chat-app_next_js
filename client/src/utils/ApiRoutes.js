@@ -1,4 +1,4 @@
-const baseUrl = `http://localhost:4000`;
+export const baseUrl = `http://localhost:4000`;
 const AUTH_Route = `${baseUrl}/api/auth`;
 const MESSAGE_PATH = `${baseUrl}/api/message`;
 export const CHECK_USER_AUTH = `${AUTH_Route}/check-user`;
