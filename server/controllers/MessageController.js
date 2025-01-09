@@ -18,7 +18,7 @@ export const addMessage = async (req, res, next) => {
         },
         include: { sender: true, receiver: true },
       });
-      return res.status(201).send("message stored!");
+      return res.status(201).json({ message: messageCreated });
     }
     return res.status(400).send("message not created!");
   } catch (err) {

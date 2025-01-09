@@ -22,7 +22,7 @@ export const reducers = (state, action) => {
     case reducerCases.SET_SOCKET:
       return { ...state, socket: action.socket };
     case reducerCases.ADD_MESSAGE:
-      return { ...state, messages: [...state.messages, action.newMessage] };
+      return { ...state, messages: [...state.messages, action.message] };
     default:
       return;
   }

@@ -6,9 +6,10 @@ import { FaMicrophone } from "react-icons/fa";
 import axios from "axios";
 import { ADD_MESSSAGE_ROUTE } from "@/utils/ApiRoutes";
 import { useStateprovider } from "@/context/StateContext";
+import { reducerCases } from "@/context/constants";
 function MessageBar() {
   const [message, setMessage] = useState("");
-  const { state } = useStateprovider();
+  const { state, dispatch } = useStateprovider();
   async function handelMessageSend() {
     console.log(state);
     const { data } = await axios.post(ADD_MESSSAGE_ROUTE, {
@@ -18,13 +19,18 @@ function MessageBar() {
         message,
       },
     });
+    console.log(state?.socket);
     state?.socket?.current?.emit("send-msg", {
       to: state?.currentChatUser?.data?.id,
       from: state?.userData?.id,
-      message: data.messages,
+      message: data.message,
+    });
+    dispatch({
+      type: reducerCases.ADD_MESSAGE,
+      message: { ...data.message },
+      fromSelf: true,
     });
     setMessage("");
-    console.log(data);
   }
   return (
     <div className="bg-panel-header-background h-20 px-4 flex items-center gap-6 relative">

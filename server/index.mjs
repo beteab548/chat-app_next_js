@@ -13,15 +13,16 @@ app.use("/api/message", messageRoutes);
 const server = app.listen(process.env.PORT, () => {
   console.log(`server started on PORT: ${process.env.PORT}`);
 });
-global.onlineUserLists = new Map();
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",
   },
 });
+global.onlineUserLists = new Map();
 io.on("connection", (socket) => {
   global.chatSocket = socket;
   socket.on("add-user", (userId) => {
+    //check if the userId is passed properly
     onlineUserLists.set(userId, socket.id);
   });
   socket.on("send-msg", (data) => {
