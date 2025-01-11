@@ -7,9 +7,23 @@ import axios from "axios";
 import { ADD_MESSSAGE_ROUTE } from "@/utils/ApiRoutes";
 import { useStateprovider } from "@/context/StateContext";
 import { reducerCases } from "@/context/constants";
+import EmojiPicker from "emoji-picker-react";
 function MessageBar() {
   const [message, setMessage] = useState("");
   const { state, dispatch } = useStateprovider();
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
+  function handleEmojiModal() {
+    setShowEmojiPicker((prev) => {
+   return !prev;
+    });
+    console.log("clicked");
+  }
+  function handleEmojiClick(emoji) {
+    setMessage((prevValue) => {
+      return (prevValue += emoji.emoji);
+    });
+  }
   async function handelMessageSend() {
     console.log(state);
     const { data } = await axios.post(ADD_MESSSAGE_ROUTE, {
@@ -39,7 +53,15 @@ function MessageBar() {
           <BsEmojiSmile
             className="text-panel-header-icon cursor-pointer text-xl"
             title="choose Emoji"
+            id="emoji-open"
+            onClick={handleEmojiModal}
           />
+          {showEmojiPicker && (
+            <div className=" absolute bottom-24 left=16 z-40">
+              <EmojiPicker onEmojiClick={handleEmojiClick} theme="dark" />
+            </div>
+          )}
+
           <ImAttachment
             className="text-panel-header-icon cursor-pointer text-xl"
             title="Attach File"
